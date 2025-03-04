@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Sliders</title>
+</head>
+<body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let style = document.createElement("style");
+            style.innerHTML = `
+                body {
+                    font-family: Arial, sans-serif;
+                }
+                .slider-container {
+                    width: 400px;
+                    margin: 20px;
+                }
+                .slider {
+                    -webkit-appearance: none;
+                    width: 100%;
+                    height: 6px;
+                    border-radius: 5px;
+                    outline: none;
+                }
+                .slider.track {
+                    background: linear-gradient(to right, green 0%, green 60%, lightgray 60%, red 100%);
+                }
+                .slider.track::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 50%;
+                    background: green;
+                    border: 2px solid white;
+                }
+                .slider.divisor::-webkit-slider-runnable-track {
+                    background: blue;
+                    height: 6px;
+                }
+                .slider.divisor::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: blue;
+                    border: 2px solid white;
+                }
+                .slider.thumb::-webkit-slider-runnable-track {
+                    background: red;
+                    height: 6px;
+                }
+                .slider.thumb::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    width: 0;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 20px solid red;
+                    margin-top: -8px;
+                }
+                .slider.tick::-webkit-slider-runnable-track {
+                    background: repeating-linear-gradient(to right, lightgray, lightgray 5px, white 5px, white 10px);
+                    height: 6px;
+                }
+                .slider.tick::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: blue;
+                    border: 2px solid white;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.innerHTML = `
+                <div class="slider-container">
+                    <label>Track</label>
+                    <input type="range" min="0" max="100" value="60" class="slider track">
+                </div>
+                <div class="slider-container">
+                    <label>Divisor</label>
+                    <input type="range" min="0" max="100" value="50" class="slider divisor">
+                </div>
+                <div class="slider-container">
+                    <label>Thumb</label>
+                    <input type="range" min="0" max="100" value="30" class="slider thumb">
+                </div>
+                <div class="slider-container">
+                    <label>Tick</label>
+                    <input type="range" min="0" max="100" value="50" class="slider tick">
+                </div>
+            `;
+
+            // Добавляем обработчики событий для каждого слайдера
+            const sliders = document.querySelectorAll('.slider');
+            sliders.forEach(slider => {
+                slider.addEventListener('click', () => {
+                    console.log('Слайдер был кликнут');
+                });
+
+                slider.addEventListener('dblclick', () => {
+                    console.log('Слайдер был дважды кликнут');
+                });
+
+                slider.addEventListener('mousedown', () => {
+                    console.log('Кнопка мыши нажата на слайдере');
+                });
+
+                slider.addEventListener('mouseup', () => {
+                    console.log('Кнопка мыши отпущена на слайдере');
+                });
+
+                slider.addEventListener('contextmenu', (event) => {
+                    event.preventDefault(); // Предотвращаем появление контекстного меню
+                    console.log('Контекстное меню вызвано на слайдере');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
